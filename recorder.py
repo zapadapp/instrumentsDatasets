@@ -55,10 +55,39 @@ match instrumentIndex:
         instrument = "Flute"
     case _:
         print("Please don't be retarded")
-        quit()            
+        quit()
 
-print("Chosen instrument: {}".format(instrument))
+noteIndex = input("\nSelect a note:\n[0] - C\n[1] - D\n[2] - E\n[3] - F\n[4] - G\n[5] - A\n[6] - B\n>")
 
+note = ""
+match noteIndex:
+    case "0":
+        note = "C"
+    case "1": 
+        note = "D"
+    case "2":
+        note = "E"
+    case "3":
+        note = "F"
+    case "4":
+        note = "G"
+    case "5":
+        note = "A"
+    case "6":
+        note = "B"            
+    case _:
+        print("Please don't be retarded")
+        quit()
+
+
+print("Chosen note: {}".format(note))
+
+scale = input("\nSelect a scale from 2 to 6: ")
+
+time.sleep(2)
+print("ready?")
+time.sleep(1)
+        
 # infinite recording loop
 while True:
 
@@ -71,7 +100,7 @@ while True:
             frames.append(data)
         print("finished recording")
 
-        fileName = "{}_{}{}".format(instrument, time.time(), ".wav")
+        fileName = "{}_{}{}_{}{}".format(instrument, note, scale, time.time(), ".wav")
         waveFile = wave.open(os.path.join(BASE_PATH, instrument, fileName), 'wb')
         waveFile.setnchannels(CHANNELS)
         waveFile.setsampwidth(audio.get_sample_size(FORMAT))
@@ -81,6 +110,7 @@ while True:
     except KeyboardInterrupt:
         print ('Bye bye!')
         break
+
         
 # stop Recording
 stream.stop_stream()
