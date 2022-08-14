@@ -13,7 +13,7 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 CHUNK = 960
-RECORD_SECONDS = 1
+RECORD_SECONDS = 2
 BASE_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), "DataTrain")
 
 audio = pyaudio.PyAudio()
