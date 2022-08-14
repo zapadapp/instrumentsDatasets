@@ -107,6 +107,9 @@ while True:
         waveFile.setframerate(RATE)
         waveFile.writeframes(b''.join(frames))
         waveFile.close()
+        time.sleep(2)
+        print("ready?")
+        time.sleep(1)
     except KeyboardInterrupt:
         print ('Bye bye!')
         break
