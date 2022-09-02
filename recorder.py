@@ -13,7 +13,7 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 CHUNK = 960
-RECORD_SECONDS = 3
+RECORD_SECONDS = 15
 BASE_PATH = os.path.dirname(os.path.realpath(__file__))
 
 audio = pyaudio.PyAudio()
