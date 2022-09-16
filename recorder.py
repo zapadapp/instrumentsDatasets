@@ -13,8 +13,10 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 CHUNK = 960
+
 RECORD_SECONDS = 30
 BASE_PATH = os.path.dirname(os.path.realpath(__file__))
+
 
 audio = pyaudio.PyAudio()
 
@@ -57,37 +59,15 @@ match instrumentIndex:
         print("Please don't be retarded")
         quit()
 
-noteIndex = input("\nSelect a note:\n[0] - C\n[1] - D\n[2] - E\n[3] - F\n[4] - G\n[5] - A\n[6] - B\n>")
-
-note = ""
-match noteIndex:
-    case "0":
-        note = "C"
-    case "1": 
-        note = "D"
-    case "2":
-        note = "E"
-    case "3":
-        note = "F"
-    case "4":
-        note = "G"
-    case "5":
-        note = "A"
-    case "6":
-        note = "B"            
-    case _:
-        print("Please don't be retarded")
-        quit()
-
+note = input("\nInsert note (format: C4, C#4 or C-4):>")
 
 print("Chosen note: {}".format(note))
 
-scale = input("\nSelect a scale from 2 to 6: ")
+# checking if path exists for that note
+exists = os.path.exists(os.path.join(BASE_PATH, instrument, note))
+if not exists:
+    os.makedirs(os.path.join(BASE_PATH, instrument, note))
 
-time.sleep(2)
-print("ready?")
-time.sleep(1)
-        
 # infinite recording loop
 while True:
 
@@ -100,8 +80,8 @@ while True:
             frames.append(data)
         print("finished recording")
 
-        fileName = "{}_{}{}_{}{}".format(instrument, note, scale, time.time(), ".wav")
-        waveFile = wave.open(os.path.join(BASE_PATH, instrument, fileName), 'wb')
+        fileName = "{}_{}_{}{}".format(instrument, note, time.time(), ".wav")
+        waveFile = wave.open(os.path.join(BASE_PATH, instrument, note, fileName), 'wb')
         waveFile.setnchannels(CHANNELS)
         waveFile.setsampwidth(audio.get_sample_size(FORMAT))
         waveFile.setframerate(RATE)
