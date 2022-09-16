@@ -100,7 +100,7 @@ while True:
             frames.append(data)
         print("finished recording")
 
-        fileName = "{}_{}{}_{}{}".format(instrument, note, scale, time.time(), ".wav")
+        fileName = "{}_{}#{}_{}{}".format(instrument, note, scale, time.time(), ".wav")
         waveFile = wave.open(os.path.join(BASE_PATH, instrument, fileName), 'wb')
         waveFile.setnchannels(CHANNELS)
         waveFile.setsampwidth(audio.get_sample_size(FORMAT))
