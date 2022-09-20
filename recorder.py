@@ -13,8 +13,10 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 CHUNK = 960
-RECORD_SECONDS = 1
-BASE_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), "DataTrain")
+
+RECORD_SECONDS = 30
+BASE_PATH = os.path.dirname(os.path.realpath(__file__))
+
 
 audio = pyaudio.PyAudio()
 
@@ -85,6 +87,9 @@ while True:
         waveFile.setframerate(RATE)
         waveFile.writeframes(b''.join(frames))
         waveFile.close()
+        time.sleep(2)
+        print("ready?")
+        time.sleep(1)
     except KeyboardInterrupt:
         print ('Bye bye!')
         break
